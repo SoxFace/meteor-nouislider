@@ -84,6 +84,8 @@ if (Meteor.isClient) {
   Template.body.events({
     'submit .doctor-awareness': function(event) {
 
+      event.preventDefault();
+
       var parameters = {
         clarity: Session.get('slider-clarity'),
         bias: Session.get('slider-bias'),
@@ -96,8 +98,12 @@ if (Meteor.isClient) {
 
       return false;
     }
+
   });
+
 }
+
+
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
