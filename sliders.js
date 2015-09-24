@@ -93,11 +93,17 @@ if (Meteor.isClient) {
     }
   });
 
+  // Template.sliders.events({
+  //   'click li': function(){
+  //     debugger;
+  //   }
+  // });
+
   Template.body.helpers({
   });
 
   Template.body.events({
-    'submit .doctor-awareness': function(event) {
+    'click #doctor': function(event) {
 
       event.preventDefault();
 
@@ -111,10 +117,18 @@ if (Meteor.isClient) {
 
       DoctorAwareness.insert(parameters);
 
+      $('.slider').val(50);
+
       return false;
+
+    },
+
+    'click #reset': function(event) {
+      event.preventDefault();
+
+      $('.slider').val(50);
     }
 
   });
 
 }
-
