@@ -27,6 +27,7 @@ if (Meteor.isClient) {
     // CLARITY SLIDER
     this.$("#slider-clarity").noUiSlider({
       start: Session.get("slider-clarity"),
+      connect: false,
       range: {
         'min': 0,
         'max': 100
