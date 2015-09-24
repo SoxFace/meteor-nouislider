@@ -1,14 +1,28 @@
 // DOCTOR COLLECTION
 DoctorAwareness = new Mongo.Collection('doctorAwareness');
 
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    // code to run on server at startup
+  });
+
+  Meteor.publish("doctorAwareness", function() {
+    return DoctorAwareness.find({});
+  });
+}
+
 if (Meteor.isClient) {
 
-  Session.setDefault("slider-clarity", [50]);
-  Session.setDefault("slider-bias", [50]);
-  Session.setDefault("slider-comfort", [50]);
-  Session.setDefault("slider-structure", [50]);
+  Meteor.subscribe("doctorAwareness");
 
   Template.sliders.rendered = function () {
+
+    Session.setDefault("slider-clarity", [50]);
+    Session.setDefault("slider-bias", [50]);
+    Session.setDefault("slider-comfort", [50]);
+    Session.setDefault("slider-structure", [50]);
+
+    var doctorResult = DoctorAwareness.findOne();
     
     // CLARITY SLIDER
     this.$("#slider-clarity").noUiSlider({
@@ -57,6 +71,7 @@ if (Meteor.isClient) {
       // set real values on 'slide' event
       Session.set('slider-structure', Math.round(val));
     });
+
   };
 
 
@@ -72,13 +87,13 @@ if (Meteor.isClient) {
     },
     sliderStructure: function () {
       return Session.get("slider-structure");
+    },
+    results: function () {
+      return DoctorAwareness.find();
     }
   });
 
   Template.body.helpers({
-    doctorAwareness: function() {
-      return DoctorAwareness.find();
-    }
   });
 
   Template.body.events({
@@ -103,10 +118,3 @@ if (Meteor.isClient) {
 
 }
 
-
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
