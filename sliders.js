@@ -27,7 +27,6 @@ if (Meteor.isClient) {
     // CLARITY SLIDER
     this.$("#slider-clarity").noUiSlider({
       start: Session.get("slider-clarity"),
-      connect: false,
       range: {
         'min': 0,
         'max': 100
@@ -120,6 +119,11 @@ if (Meteor.isClient) {
 
       $('.slider').val(50);
 
+      Session.set("slider-clarity", [50]);
+      Session.set("slider-bias", [50]);
+      Session.set("slider-comfort", [50]);
+      Session.set("slider-structure", [50]);
+
       return false;
 
     },
@@ -128,6 +132,14 @@ if (Meteor.isClient) {
       event.preventDefault();
 
       $('.slider').val(50);
+
+      Session.set("slider-clarity", [50]);
+      Session.set("slider-bias", [50]);
+      Session.set("slider-comfort", [50]);
+      Session.set("slider-structure", [50]);
+
+      return false;
+
     }
 
   });

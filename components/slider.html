@@ -15,11 +15,13 @@
   <div class="slider" id="slider-structure"></div>
   <p>Doctor value: {{sliderStructure}}</p>
   
-  <h3>Results</h3>
-  
+  <h3>Results in DB</h3>
   {{#each results}}
     <ul>
-      <li>{{clarity}}</li>
+      <li>Clarity: {{clarity}}</li>
+      <li>Bias: {{bias}}</li>
+      <li>Comfort: {{comfort}}</li>
+      <li>Structure: {{structure}}</li>
     </ul>
   {{/each}}
 
